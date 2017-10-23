@@ -12,7 +12,7 @@
     </p>
     <div class="infoBox">
         <div class="leftImg pull-left">
-            <img src="{{ asset("uploads/{$news->image}") }}">
+            <img src="{{ asset("storage/{$news->image}") }}">
         </div>
         <div class="rightInfo pull-left">
             <div class="list-seperator"></div>

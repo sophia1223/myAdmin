@@ -13,7 +13,7 @@
                    @endif
                    accept="image/gif, image/jpeg,image/png"/>
             @if(isset($banner))
-                <img src="{{asset("storage/{$banner->path}")}}" id="old_img" style="width:200px; height: 120px;max-width: 200px;max-height: 120px;">
+                <img src="{{asset("storage/{$banner->image}")}}" id="old_img" style="width:200px; height: 120px;max-width: 200px;max-height: 120px;">
             @endif
             <div id="preview">
             </div>

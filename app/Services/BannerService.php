@@ -32,7 +32,7 @@ class BannerService
         $columns = [
             ['db' => 'Banner.id', 'dt' => 0],
             [
-                'db' => 'Banner.path', 'dt' => 1,
+                'db' => 'Banner.image', 'dt' => 1,
                 'formatter' => function ($d) {
                     return '<img
                     src="'.asset("storage/{$d}").'"

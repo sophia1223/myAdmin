@@ -11,5 +11,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Banner extends Model
 {
-    protected $fillable = ['path', 'remark', 'belongs'];
+    protected $fillable = ['image', 'remark', 'belongs'];
 }

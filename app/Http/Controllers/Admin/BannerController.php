@@ -56,7 +56,7 @@ class BannerController extends Controller
     public function store(BannerRequest $request)
     {
         $input = $request->all('remark','belongs');
-        $input['path'] = $request->file('path')->store('banners');
+        $input['image'] = $request->file('path')->store('banners');
         return $this->service->save($input);
     }
     
@@ -87,9 +87,9 @@ class BannerController extends Controller
         $input = $request->all('remark','belongs','old_path');
         if($request->file('path')){
             Storage::delete($input['old_path']);
-            $input['path'] = $request->file('path')->store('banners');
+            $input['image'] = $request->file('path')->store('banners');
         }else{
-            $input['path'] = $input['old_path'];
+            $input['image'] = $input['old_path'];
         }
         return $this->service->save($input,$id);
     }
