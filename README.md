@@ -59,14 +59,10 @@ eg
 
 #### **路由（扫描添加action适用）**
 
- *1、路由格式为Controller/Action*
- 
- *2、Controller部分与表名相同（全小写，单词复数格式，两个单词之间使用`_`连接）*
- 
- *3、Action部分与方法名相同*
- 
- *4、相同功能的请求使用同一个alias别名（如create方法和store方法）*
- 
+   *1、路由格式为Controller/Action*  
+   *2、Controller部分与表名相同（全小写，单词复数格式，两个单词之间使用`_`连接）*  
+   *3、Action部分与方法名相同*  
+   *4、相同功能的请求使用同一个alias别名（如create方法和store方法）*  
 
 eg
 ```
@@ -90,7 +86,16 @@ eg
 ### 2.批量扫描功能
   此功能会自动扫描所有Controller的所有非构造函数的public方法，将有正确路由格式的方法添加至permission表，功能名称为注释的第一行，如使用此功能，请按规则书写注释及路由
 
-请求：
+####  **修改Controller文件夹的路径**
+打开`app/Services/PermissionService.php`,  
+
+```
+ # 控制器路径
+ protected $dir = '/app/Http/Controllers/Admin';
+```
+`$dir`改为你`Admin`控制器文件夹所在路径（最好使用从系统根目录开始的绝对路径）
+
+####  **请求**
 ```
 GET permissions/set
 ```
