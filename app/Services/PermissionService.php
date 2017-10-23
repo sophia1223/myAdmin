@@ -29,7 +29,7 @@ class PermissionService
         'LoginController',
     ];
     # 控制器路径
-    protected $dir = '/media/sf_sandbox/swun/app/Http/Controllers/Admin';
+    protected $dir = '/app/Http/Controllers/Admin';
 
     public function __construct(Permission $permission)
     {
