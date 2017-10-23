@@ -30,7 +30,8 @@
 ```
   php artisan storage:link
 ```
-### 3.后台访问地址
+
+### 2.后台访问地址
 
 ```
 /admin
