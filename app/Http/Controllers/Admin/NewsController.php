@@ -65,7 +65,7 @@ class NewsController extends Controller
         }
         
         $input = $request->all('title','content','news_type_id');
-        $input['image'] = $request->file('image')->store('news');
+        $input['image'] = $request->file('image')->store('news', 'public');
         return $this->service->save($input);
     }
     
@@ -96,7 +96,7 @@ class NewsController extends Controller
         $input = $request->all('title','content','news_type_id','status','old_path');
         if($request->file('image')){
             Storage::delete($input['old_path']);
-            $input['image'] = $request->file('image')->store('news');
+            $input['image'] = $request->file('image')->store('news', 'public');
         }
         return $this->service->save($input,$id);
     }
