@@ -29,7 +29,7 @@ class PermissionService
         'LoginController',
     ];
     # 控制器路径
-    protected $dir = '/app/Http/Controllers/Admin';
+    protected $dir = '/media/myAdmin/app/Http/Controllers/Admin';
 
     public function __construct(Permission $permission)
     {
@@ -150,7 +150,7 @@ class PermissionService
         
         for ($i = 0; $i < sizeof($controllers); $i++) {
             $controllers[$i] = str_replace('/', '\\', $controllers[$i]);
-            $controllers[$i] = str_replace('\\media\\sf_sandbox\\swun\\', '', $controllers[$i]);
+            $controllers[$i] = str_replace('\\media\\myAdmin\\', '', $controllers[$i]);
             $controllers[$i] = str_replace('.php', '', $controllers[$i]);
         }
         

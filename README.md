@@ -91,13 +91,33 @@ eg
 ####  **修改Controller文件夹的路径**
 打开`app/Services/PermissionService.php`,  
 
+*1.*  
 ```
  # 控制器路径
- protected $dir = '/app/Http/Controllers/Admin';
+ protected $dir = '/media/myAdmin/app/Http/Controllers/Admin';
 ```
-`$dir`改为你`Admin`控制器文件夹所在路径（最好使用从系统根目录开始的绝对路径）
+`$dir`改为你`Admin`控制器文件夹所在路径（使用从系统根目录开始的绝对路径）
+
+
+*2.*  
+```
+/**
+ * 返回控制器的完整名字空间路径
+ *
+ * @param $controllers
+ */
+public function getControllerNamespaces(&$controllers) {    
+    for ($i = 0; $i < sizeof($controllers); $i++) {
+        $controllers[$i] = str_replace('/', '\\', $controllers[$i]);
+        $controllers[$i] = str_replace('\\media\\myAdmin\\', '', $controllers[$i]);
+        $controllers[$i] = str_replace('.php', '', $controllers[$i]);
+    }       
+}
+```
+
+`\\media\\myAdmin\\`改为你从系统根目录开始的项目目录控制器文件夹所在路径，使用`\\`替换`/`
 
 ####  **请求**
 ```
-GET permissions/set
+GET admin/permissions/set
 ```
