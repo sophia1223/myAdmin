@@ -69,6 +69,6 @@ class Handler extends ExceptionHandler {
             return jsonResponse('登录过期', 401);
         }
         
-        return redirect()->guest(route('login'));
+        return redirect()->guest('admin/login');
     }
 }
