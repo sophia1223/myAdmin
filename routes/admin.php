@@ -11,6 +11,12 @@ Route::get('/getMenu', ['as' => 'admin.index', 'uses' => 'DashboardController@ge
 Route::get('permissions/set', 'PermissionController@set');
 
 Route::group(['middleware' => ['auth:admin', 'permission', 'auth.admin']], function(Router  $router) {
+    //富文本编辑器不能使用xss中间件，否则编辑的样式保存不上
+    $router->post('news/store', ['as' => 'admin.news.create', 'uses' => 'NewsController@store']);
+    $router->post('news/update/{id}', ['as' => 'admin.news.edit', 'uses' => 'NewsController@update']);
+});
+
+Route::group(['middleware' => ['auth:admin', 'xss', 'permission', 'auth.admin']], function(Router  $router) {
     $router->get('changePassword', ['as' => 'admin.update-pwd', 'uses' => 'DashboardController@changePassword']);
     $router->post('updatePassword', ['as' => 'admin.update-pwd', 'uses' => 'DashboardController@updatePassword']);
     
@@ -49,9 +55,7 @@ Route::group(['middleware' => ['auth:admin', 'permission', 'auth.admin']], funct
     //新闻管理路由
     $router->get('news/index', ['as' => 'admin.news.index', 'uses' => 'NewsController@index']);
     $router->get('news/create', ['as' => 'admin.news.create', 'uses' => 'NewsController@create']);
-    $router->post('news/store', ['as' => 'admin.news.create', 'uses' => 'NewsController@store']);
     $router->get('news/edit/{id}', ['as' => 'admin.news.edit', 'uses' => 'NewsController@edit']);
-    $router->post('news/update/{id}', ['as' => 'admin.news.edit', 'uses' => 'NewsController@update']);
     $router->delete('news/destroy/{id}', ['as' => 'admin.news.destroy', 'uses' => 'NewsController@destroy']);
     $router->get('news/show/{id}', ['as' => 'admin.news.show', 'uses' => 'NewsController@show']);
     $router->post('news/approval/{id}', ['as' => 'admin.news.approval', 'uses' => 'NewsController@approval']);
