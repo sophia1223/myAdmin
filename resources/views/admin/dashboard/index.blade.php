@@ -99,17 +99,6 @@
                     <a href="javascript:"><i class="fa fa-circle text-success"></i> {{ $user->roles[0]->name }}</a>
                 </div>
             </div>
-            <!-- search form -->
-            <form action="#" class="sidebar-form">
-                <div class="input-group">
-                    <input name="q" class="form-control" placeholder="搜索...">
-                    <span class="input-group-btn">
-                <button name="search" id="search-btn" class="btn btn-flat">
-                    <i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
             <!--左侧菜单-->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">菜单</li>
@@ -187,8 +176,8 @@
 <!-- echarts -->
 <script src="{{ URL::asset('assets/plugins/echarts/echarts.common.min.js') }}"></script>
 <!--UEditor-->
-<script type="text/javascript" src="{{ URL::asset('assets/plugins/UEditor/ueditor.config.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/plugins/UEditor/ueditor.all.js') }}"></script>
+{{--<script type="text/javascript" src="{{ URL::asset('assets/plugins/UEditor/ueditor.config.js') }}"></script>--}}
+{{--<script type="text/javascript" src="{{ URL::asset('assets/plugins/UEditor/ueditor.all.js') }}"></script>--}}
 <!-- dateTimePicker -->
 <script src="{{ URL::asset('assets/plugins/bootstrap-dateTimePicker/js/moment-with-locales.js') }}"></script>
 <script src="{{ URL::asset('assets/plugins/bootstrap-dateTimePicker/js/bootstrap-datetimepicker.js') }}"></script>
@@ -201,10 +190,11 @@
 <script src="{{ URL::asset('assets/plugins/jQueryUI/js/datepicker-zh-CN.js') }}"></script>
 <!--switchery-->
 <script src="{{ URL::asset('assets/plugins/switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('js/switcher.init.js') }}"></script>
-<script src="{{ asset('js/plugins/switchery/switchery.min.js') }}"></script>
-
+<script src="{{ URL::asset('js/switcher.init.js') }}"></script>
+<script src="{{ URL::asset('js/plugins/switchery/switchery.min.js') }}"></script>
+<!--kindEditor-->
+<script src="{{URL::asset('assets/plugins/kindeditor/kindeditor-all.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/kindeditor/zh-CN.js')}}"></script>
 @include('admin.dashboard.updatePassword')
-
 </body>
 </html>

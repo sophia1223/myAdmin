@@ -1,4 +1,4 @@
-<div class="box box-primary">
+<div class="box box-primary banner">
     <div class="box-header">
         @include('admin.partials.list_header',['table' => 'banners'])
     </div>

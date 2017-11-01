@@ -64,7 +64,7 @@ var crud = {
     },
     init: function (homeUrl, formId, ajaxUrl, requestType) {
         // Select2
-        $('select').select2();
+        $('.select2').select2();
 
         // Cancel button
         $('#cancel, #record-list').on('click', function () {
@@ -136,23 +136,30 @@ var crud = {
         this.init(table + '/index', formId, table + '/approval/' + id, 'POST');
     },
     formParsley: function ($form, requestType, ajaxUrl) {
+
         if($('#container').length>0){
-            UE.delEditor('container');
-            var ue = UE.getEditor('container',{
-                initialFrameHeight: 400,
-                initialFrameWidth: 600,
-                zIndex: 1
-            });
+            crud.kedit('textarea[name="content"]');
         }
         $form.parsley().on('form:validated', function () {
             if ($('.parsley-error').length === 0) {
                 var data = new FormData($form[0]);
-                if ( $("#container").length > 0 ) {
-                    data.set('content', ue.getContent());
-                }
                 //请求
                 crud.ajaxRequest(requestType, page.siteRoot() + ajaxUrl, data);
             }
         }).on('form:submit', function() {return false; });
+    },
+
+    kedit: function (kedit) {
+        KindEditor.create(kedit, {
+            width: '100%',
+            height: '400px',
+            resizeMode: 0,
+            allowPreviewEmoticons: false,
+            langType : 'zh-CN',
+            allowFileManager: true,
+            items:[
+                'copy','copy','plainpaste','wordpaste','selectall','justifyleft','justifyleft','justifyleft','justifyfull','insertorderedlist','insertunorderedlist','indent','outdent','outdent','superscript','title','fontname','fontsize','fontsize','bgcolor','bold','bold','underline','image','|'
+            ]
+        });
     }
 };

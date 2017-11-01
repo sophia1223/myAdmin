@@ -40,7 +40,7 @@
     <div class="form-group">
         <label for="content" class="col-sm-4 control-label">内容</label>
         <div class="col-sm-5">
-            <script id="container" name="content" type="text/plain">{!! $news->content or '' !!}</script>
+            <textarea id="container" name="content" type="text/plain">{!! $news->content or '' !!}</textarea>
         </div>
     </div>
 </div>

@@ -139,7 +139,7 @@
 }
 
 .questionnaires .inputBox > input {
-    width: 95%;
+    width: 90%;
 }
 
 .questionnaires .inputBox > i {
@@ -245,4 +245,8 @@
     outline: none;
     text-decoration: none;
     color: #72afd2
+}
+/*banner*/
+.banner td{
+    vertical-align: middle!important;
 }
