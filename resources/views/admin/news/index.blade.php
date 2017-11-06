@@ -22,7 +22,10 @@
     </div>
 </div>
 @include('admin.partials.modal_dialog')
-
 <script>
-$(crud.index('news'));
+var columnDefs = [
+    {targets: [1, 2, 3, 4], className: 'text-center'},
+    {targets: [5], className: 'text-right'}
+];
+$(crud.index('news', columnDefs));
 </script>

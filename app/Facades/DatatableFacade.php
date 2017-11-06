@@ -222,7 +222,10 @@ HTML;
                     if ($pos) {
                         $column['db'] = substr($column['db'], 0, $pos);
                     }
-                    $globalSearch[] = $column['db'] . " LIKE BINARY '%" . $str . "%'";
+                    $likeStr = explode(' ', $str);
+                    foreach ($likeStr as $key => $value){
+                        $globalSearch[$key][] = $column['db'] . " LIKE BINARY '%" . $value . "%'";
+                    }
                 }
             }
         }
@@ -237,10 +240,17 @@ HTML;
                 $columnSearch[] = $column['db'] . " LIKE BINARY '%" . $str . "%'";
             }
         }
+    
         // Combine the filters into a single string
         $where = '';
         if (count($globalSearch)) {
-            $where = '(' . implode(' OR ', $globalSearch) . ')';
+            $where = '';
+            foreach ($globalSearch as $val){
+                $where .= '(' . implode(' OR ', $val) . ') AND';
+            }
+            if($where){
+                $where = substr($where,0,-4);
+            }
         }
         if (count($columnSearch)) {
             $where = $where === '' ?

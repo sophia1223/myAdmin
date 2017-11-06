@@ -10,6 +10,7 @@
     "sUrl":          "",
     "sEmptyTable":     "表中数据为空",
     "sLoadingRecords": "载入中...",
+    "searchPlaceholder": "多关键词使用空格分隔",
     "sInfoThousands":  ",",
     "oPaginate": {
         "sFirst":    "首页",

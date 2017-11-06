@@ -23,5 +23,9 @@
 @include('admin.partials.modal_dialog')
 
 <script>
-$(crud.index('menus', 'asc', 4));
+var columnDefs = [
+    {targets: [1, 2, 3], className: 'text-center'},
+    {targets: [4], className: 'text-right'}
+];
+$(crud.index('menus', columnDefs, 'asc', 4));
 </script>

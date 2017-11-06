@@ -1,5 +1,5 @@
 var crud = {
-    unbindEvents: function() {
+    unbindEvents: function () {
         $('#add-record').unbind('click');
         $(document).off('click', '.fa-edit');
         $(document).off('click', '.fa-eye');
@@ -8,7 +8,7 @@ var crud = {
         $(document).off('click', '.act-show');
         $('#confirm-delete').unbind('click');
     },
-    initDataTable: function (table,order,start,first) {
+    initDataTable: function (table, columnDefs, order, start) {
         $('#data-table').dataTable({
             processing: true,
             serverSide: true,
@@ -18,21 +18,25 @@ var crud = {
             stateSave: true,
             autoWidth: false,
             scrollX: true,
-            language: {url: page.publicRoot() + 'files/ch.json'},
+            columnDefs: columnDefs,
+            language: {
+                searchPlaceholder: "searchPlaceholder",
+                url: page.publicRoot() + 'files/ch.json'
+            },
             lengthMenu: [[15, 25, 50, -1], [15, 25, 50, '所有']],
-            buttons: [],
-            aoColumnDefs:  [ { "bSortable": first, "aTargets": [ 0 ] }]
+            buttons: []
         });
+
     },
     ajaxRequest: function (requestType, ajaxUrl, data, obj) {
-        if (data){
-            data.append('_token',$('#csrf_token').attr('content'));
+        if (data) {
+            data.append('_token', $('#csrf_token').attr('content'));
         }
         $.ajax({
             type: requestType,
             dataType: 'json',
             url: ajaxUrl,
-            data: data ,
+            data: data,
             processData: false,
             contentType: false,
             success: function (result) {
@@ -77,15 +81,16 @@ var crud = {
     },
     index: function (table) {
         crud.unbindEvents();
+        //默认对齐方式
+        var columnDefs = [{targets: [$('#data-table').find('thead tr th').length - 1], className: 'text-right'}];
+        columnDefs = arguments[1] ? columnDefs.concat(arguments[1]) : columnDefs;
         //默认datatable参数
-        var order = arguments[1] ? arguments[1] : 'desc';
+        var order = arguments[2] ? arguments[2] : 'desc';
         //默认排序列数
-        var start = arguments[2] ? arguments[2] : 0;
-        //默认第一列排序
-        var first = !arguments[3] ? arguments[3] : true;
+        var start = arguments[3] ? arguments[3] : 0;
 
         // 显示记录列表
-        crud.initDataTable(table,order,start,first);
+        crud.initDataTable(table, columnDefs, order, start);
 
         // 新增记录
         $('#add-record').click(function () {
@@ -129,7 +134,7 @@ var crud = {
     },
     approval: function (formId, table) {
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             new Switchery(html);
         });
         var id = $('#id').val();
@@ -137,7 +142,7 @@ var crud = {
     },
     formParsley: function ($form, requestType, ajaxUrl) {
 
-        if($('#container').length>0){
+        if ($('#container').length > 0) {
             crud.kedit('textarea[name="content"]');
         }
         $form.parsley().on('form:validated', function () {
@@ -146,7 +151,9 @@ var crud = {
                 //请求
                 crud.ajaxRequest(requestType, page.siteRoot() + ajaxUrl, data);
             }
-        }).on('form:submit', function() {return false; });
+        }).on('form:submit', function () {
+            return false;
+        });
     },
 
     kedit: function (kedit) {
@@ -154,11 +161,11 @@ var crud = {
             width: '100%',
             height: '400px',
             resizeMode: 0,
-            allowPreviewEmoticons: false,
-            langType : 'zh-CN',
+            allowPreviewEmoticons: true,
+            langType: 'zh-CN',
             allowFileManager: true,
-            items:[
-                'copy','copy','plainpaste','wordpaste','selectall','justifyleft','justifyleft','justifyleft','justifyfull','insertorderedlist','insertunorderedlist','indent','outdent','outdent','superscript','title','fontname','fontsize','fontsize','bgcolor','bold','bold','underline','image','|'
+            items: [
+                'copy', 'plainpaste', 'wordpaste', 'selectall', 'justifyleft', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'superscript', 'title', 'fontname',  'fontsize', 'bgcolor', 'bold', 'underline', 'image', '|'
             ]
         });
     }
